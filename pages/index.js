@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Header from '../components/Header';
-import Todo from '../containers/todo';
+import Todo from '../containers/Todo';
 
 export default function Home() {
   return (
