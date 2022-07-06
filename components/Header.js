@@ -48,7 +48,7 @@ function Header() {
     darkMode
       ? document.documentElement.classList.add('dark')
       : document.documentElement.classList.remove('dark');
-  }, []);
+  }, [darkMode]);
 
   return (
     <div className='fixed flex justify-between items-center top-0 h-20 px-4 w-full'>
