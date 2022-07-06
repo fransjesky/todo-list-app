@@ -54,12 +54,12 @@ function Header() {
     <div className='fixed flex justify-between items-center top-0 h-20 px-4 w-full'>
       <div className='flex flex-col'>
         <p className='m-0 dark:text-white'>Todo App</p>
-        <span className='font-sans text-xs text-gray-400'>ver 0.1</span>
+        <span className='font-sans text-xs text-gray-400'>ver 0.2</span>
       </div>
       {darkMode ? (
         <Button
           label='light mode'
-          color='bg-sky-400'
+          color='bg-orange-400'
           icon={icons.lightMode}
           onClick={handleMode}
         />

@@ -1,10 +1,8 @@
 import Head from 'next/head';
-// import dynamic from 'next/dynamic';
 import Header from '../components/Header';
 import Todo from '../containers/todo';
 
 export default function Home() {
-  // const Todo = dynamic(() => import('../containers/Todo'), { ssr: false });
   return (
     <div className='h-screen flex flex-col items-center justify-center relative dark:bg-neutral-900'>
       <Head>

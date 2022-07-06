@@ -4,7 +4,7 @@ function Button({ icon, label, color, onClick }) {
   return (
     <button
       className={`flex p-2 rounded-md ${
-        color ? color : `bg-sky-400 dark:bg-violet-500`
+        color ? color : `bg-orange-400 dark:bg-violet-500`
       } capitalize text-white text-sm`}
       onClick={onClick}
     >
