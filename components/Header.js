@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Button from './Button';
 
+// redux
+import { useSelector, useDispatch } from 'react-redux';
+import { switchDarkTheme, switchLightTheme } from '../redux/features/theme';
+
 function Header() {
   const icons = {
     darkMode: (
@@ -31,10 +35,14 @@ function Header() {
     ),
   };
 
+  const dispatch = useDispatch();
+
   const [darkMode, setDarkMode] = useState(true);
   const handleMode = () => {
+    darkMode ? dispatch(switchLightTheme()) : dispatch(switchDarkTheme());
     darkMode ? setDarkMode(false) : setDarkMode(true);
     document.documentElement.classList.toggle('dark');
+
     darkMode
       ? window.localStorage.setItem('darkMode', false)
       : window.localStorage.setItem('darkMode', true);
