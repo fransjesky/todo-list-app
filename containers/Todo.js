@@ -4,15 +4,10 @@ import moment from 'moment';
 
 function Todo() {
   return (
-    <div className='h-4/6 w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 p-2 grid gap-2 grid-rows-6 rounded-md shadow-lg border border-orange-400 dark:border-violet-500 relative'>
-      <div className='absolute -top-6 left-0'>
+    <div className='h-4/6 w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 p-2 grid gap-2 grid-rows-6 rounded-md shadow-lg border border-orange-400 dark:border-violet-500 bg-white dark:bg-neutral-900  relative'>
+      <div className='absolute bottom-2 left-2'>
         <p className='text-orange-400 dark:text-violet-500 text-xs'>
-          Today's Date - {moment(Date.now()).format('LL')}
-        </p>
-      </div>
-      <div className='absolute -top-6 right-0'>
-        <p className='text-orange-400 dark:text-violet-500 text-xs'>
-          {moment(Date.now()).format('LT')}
+          {moment(Date.now()).format('LL LT')}
         </p>
       </div>
       <div className='row-span-4 h-full w-full p-5 bg-gradient-to-r from-orange-400 to-yellow-500 dark:from-violet-500 dark:to-pink-500 rounded-md'>
