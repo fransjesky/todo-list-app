@@ -21,5 +21,6 @@ This to-do list app data are stored in browser local storage. Which means, the d
 - Next.js `(12.2.0)`
 - Tailwind CSS `(3.1.4)`
 - Heroicons `(1.0.6)`
+- Redux Toolkit `(1.8.3)`
 - Node.js `(16.15.1 LTS)`
 - Yarn `(1.22.17)`
