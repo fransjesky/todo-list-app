@@ -20,25 +20,25 @@ function List({ entry, firstIndex, currentIndex, lastIndex }) {
   return (
     <div
       className={`flex justify-between ${
-        firstIndex ? 'mb-2' : lastIndex ? 'mt-2' : 'my-2'
-      } py-2 ${lastIndex ? null : 'border-b'} border-white`}
+        firstIndex ? 'pb-4' : lastIndex ? 'pt-4' : 'py-4'
+      } ${lastIndex ? null : 'border-b'} border-white`}
     >
       <p
-        className={`cursor-default ${
-          checked ? 'line-through decoration-2 text-teal-400' : 'text-white'
-        }`}
+        className={`cursor-default w-3/4 font-medium font-sans ${
+          checked ? 'line-through decoration-1 text-neutral-400' : 'text-white'
+        } select-none`}
       >
         {formattedEntry}
       </p>
       <div className='text-white cursor-pointer flex'>
         {checked ? (
           <div
-            className='mr-2 cursor-pointer text-teal-400'
+            className='mr-2 h-7 w-7 flex justify-center items-center bg-white rounded-full cursor-pointer'
             onClick={handleChecked}
           >
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className='h-5 w-5'
+              className='h-5 w-5 select-none text-orange-400 dark:text-violet-500 transition-all ease-linear hover:text-sky-400 dark:hover:text-sky-400 hover:scale-125'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -47,15 +47,18 @@ function List({ entry, firstIndex, currentIndex, lastIndex }) {
               <path
                 strokeLinecap='round'
                 strokeLinejoin='round'
-                d='M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z'
+                d='M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z'
               />
             </svg>
           </div>
         ) : (
-          <div className='mr-2 cursor-pointer' onClick={handleChecked}>
+          <div
+            className='mr-2 h-7 w-7 flex justify-center items-center bg-white rounded-full cursor-pointer'
+            onClick={handleChecked}
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
-              className='h-5 w-5'
+              className='h-5 w-5 select-none text-orange-400 dark:text-violet-500 transition-all ease-linear hover:text-green-400 dark:hover:text-green-400 hover:scale-125'
               fill='none'
               viewBox='0 0 24 24'
               stroke='currentColor'
@@ -69,10 +72,13 @@ function List({ entry, firstIndex, currentIndex, lastIndex }) {
             </svg>
           </div>
         )}
-        <div onClick={handleRemoveEntry}>
+        <div
+          className='h-7 w-7 flex justify-center items-center bg-white rounded-full'
+          onClick={handleRemoveEntry}
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            className='h-5 w-5'
+            className='h-5 w-5 select-none text-orange-400 dark:text-violet-500 transition-all ease-linear hover:text-pink-500 dark:hover:text-pink-500 hover:scale-125'
             fill='none'
             viewBox='0 0 24 24'
             stroke='currentColor'

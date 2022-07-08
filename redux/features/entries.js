@@ -12,9 +12,13 @@ const entriesSlice = createSlice({
     removeEntry: (state, action) => {
       state.splice(action.payload, 1);
     },
+    clearEntries: (state) => {
+      state.splice(0, state.length);
+      console.log('resetted!');
+    },
   },
 });
 
-export const { addEntry, removeEntry } = entriesSlice.actions;
+export const { addEntry, removeEntry, clearEntries } = entriesSlice.actions;
 
 export default entriesSlice.reducer;

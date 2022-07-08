@@ -61,8 +61,10 @@ function Header() {
   return (
     <div className='fixed flex justify-between items-center top-0 h-20 px-4 w-full'>
       <div className='flex flex-col'>
-        <p className='m-0 dark:text-white'>Simple Todo App</p>
-        <span className='font-sans text-xs text-gray-400'>ver 0.4</span>
+        <p className='m-0 dark:text-white select-none'>Simple Todo App</p>
+        <span className='font-sans text-xs text-gray-400 select-none'>
+          ver 0.5
+        </span>
       </div>
       {darkMode ? (
         <Button
