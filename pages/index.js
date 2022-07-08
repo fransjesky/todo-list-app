@@ -18,7 +18,7 @@ export default function Home() {
       }`}
     >
       <Head>
-        <title>To-Do App</title>
+        <title>Todo App</title>
         <meta
           name='description'
           content='A simple to-do list app created by Frans Jesky. Built with Next.js and Tailwind'
