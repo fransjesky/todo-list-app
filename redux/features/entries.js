@@ -8,7 +8,7 @@ const entriesSlice = createSlice({
   reducers: {
     getInit: (state, action) => {
       action.payload.forEach((element) => {
-        state.splice(0, action.payload.length);
+        state.splice(action.payload.length - 1, action.payload.length);
         state.push(element);
       });
     },

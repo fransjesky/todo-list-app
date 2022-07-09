@@ -55,7 +55,7 @@ function Header() {
       <div className='flex flex-col'>
         <p className='m-0 dark:text-white select-none'>Simple Todo App</p>
         <span className='font-sans text-xs text-gray-400 select-none'>
-          ver 0.5
+          ver 0.6
         </span>
       </div>
       {darkMode ? (
