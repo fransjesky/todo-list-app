@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
 import List from '../components/List';
 import Empty from '../components/Empty';
@@ -6,16 +6,39 @@ import moment from 'moment';
 
 // redux
 import { useDispatch, useSelector } from 'react-redux';
-import { addEntry, clearEntries } from '../redux/features/entries';
+import { getInit, addEntry, clearEntries } from '../redux/features/entries';
 
 function Todo() {
   const dispatch = useDispatch();
   const { todos } = useSelector((state) => state);
   const [newEntry, setNewEntry] = useState('');
+  const [initTodos, setInitTodos] = useState([]);
+  const [todoList, setTodoList] = useState([]);
+
+  useEffect(() => {
+    // create a local storage if there is no existing storage
+    localStorage.getItem('todos') ? null : localStorage.setItem('todos', todos);
+
+    const fetchStorage = localStorage.getItem('todos');
+    if (localStorage.getItem('todos')) {
+      dispatch(getInit(fetchStorage.split(',')));
+    }
+
+    localStorage.getItem('todos')
+      ? setInitTodos(fetchStorage.split(','))
+      : null;
+  }, []);
 
   const addTodo = (event) => {
+    // save new entry to redux
     event.preventDefault();
-    newEntry.length > 0 ? dispatch(addEntry(newEntry)) : null;
+    dispatch(addEntry(newEntry));
+
+    // save new entry to local storage
+    localStorage.setItem(
+      'todos',
+      todos.length > 0 ? [...todos, newEntry] : [newEntry]
+    );
 
     // clear input
     document.querySelector('#entry').value = '';
@@ -24,11 +47,23 @@ function Todo() {
 
   const clearTodo = () => {
     dispatch(clearEntries());
+
+    // reset the initial list
+    setInitTodos([]);
+
+    // reset the storage
+    localStorage.setItem('todos', []);
   };
 
   const handleChange = (event) => {
     setNewEntry(event.target.value);
   };
+
+  // finalized data array
+  useEffect(() => {
+    const finalArr = localStorage.getItem('todos')?.split(',');
+    setTodoList(finalArr);
+  }, [todos]);
 
   return (
     <div className='h-4/6 w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 p-2 grid gap-2 grid-rows-6 rounded-md shadow-lg border border-orange-400 dark:border-violet-500 bg-white dark:bg-neutral-900  relative'>
@@ -37,14 +72,14 @@ function Todo() {
           {moment(Date.now()).format('ddd, D MMMM')}
         </p>
         <div className='overflow-scroll px-4 mt-4 h-4/5'>
-          {todos.length > 0 ? (
-            todos.map((value, index) => {
+          {todoList?.length > 0 && todoList[0] != '' ? (
+            todoList.map((value, index) => {
               return (
                 <List
                   entry={value}
                   firstIndex={index == 0 ? true : false}
                   currentIndex={index}
-                  lastIndex={index == todos.length - 1 ? true : false}
+                  lastIndex={index == todoList.length - 1 ? true : false}
                   key={index}
                 />
               );
@@ -76,7 +111,7 @@ function Todo() {
         <div className='flex justify-center'>
           <div className='mx-2'>
             <Button
-              disabled={todos.length <= 0 ? true : false}
+              disabled={todoList.length <= 0 ? true : false}
               type='button'
               label='clear list'
               icon={
