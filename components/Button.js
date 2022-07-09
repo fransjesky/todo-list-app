@@ -9,7 +9,7 @@ function Button({ icon, label, color, onClick, disabled, ...props }) {
           : disabled
           ? 'bg-neutral-700'
           : `bg-orange-400 dark:bg-violet-500`
-      } capitalize text-white text-sm select-none`}
+      } capitalize text-white text-sm select-none outline-none`}
       onClick={onClick}
       disabled={disabled}
       {...props}

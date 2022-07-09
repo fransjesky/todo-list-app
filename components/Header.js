@@ -42,17 +42,9 @@ function Header() {
     darkMode ? dispatch(switchLightTheme()) : dispatch(switchDarkTheme());
     darkMode ? setDarkMode(false) : setDarkMode(true);
     document.documentElement.classList.toggle('dark');
-
-    darkMode
-      ? window.localStorage.setItem('darkMode', false)
-      : window.localStorage.setItem('darkMode', true);
   };
 
   useEffect(() => {
-    darkMode
-      ? window.localStorage.setItem('darkMode', true)
-      : window.localStorage.setItem('darkMode', false);
-
     darkMode
       ? document.documentElement.classList.add('dark')
       : document.documentElement.classList.remove('dark');

@@ -14,7 +14,13 @@ function List({ entry, firstIndex, currentIndex, lastIndex }) {
   };
 
   const handleRemoveEntry = () => {
+    // update the redux
     dispatch(removeEntry(currentIndex));
+
+    // update local storage
+    const fetchStorage = localStorage.getItem('todos').split(',');
+    fetchStorage.splice(currentIndex, 1);
+    localStorage.setItem('todos', [fetchStorage]);
   };
 
   return (

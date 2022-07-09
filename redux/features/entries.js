@@ -6,6 +6,12 @@ const entriesSlice = createSlice({
   name: 'TODO_LIST',
   initialState,
   reducers: {
+    getInit: (state, action) => {
+      action.payload.forEach((element) => {
+        state.splice(0, action.payload.length);
+        state.push(element);
+      });
+    },
     addEntry: (state, action) => {
       state.push(action.payload);
     },
@@ -14,11 +20,11 @@ const entriesSlice = createSlice({
     },
     clearEntries: (state) => {
       state.splice(0, state.length);
-      console.log('resetted!');
     },
   },
 });
 
-export const { addEntry, removeEntry, clearEntries } = entriesSlice.actions;
+export const { getInit, addEntry, removeEntry, clearEntries } =
+  entriesSlice.actions;
 
 export default entriesSlice.reducer;
