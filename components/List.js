@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // redux
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { removeEntry, checkEntry } from '../redux/features/entries';
 
 function List({ id, entry, completed, firstIndex, currentIndex, lastIndex }) {
   const dispatch = useDispatch();
-  const [checked, setChecked] = useState(completed);
+  const { todos } = useSelector((state) => state);
+  const [checked, setChecked] = useState(false);
   const formattedEntry = entry?.charAt(0).toUpperCase() + entry?.slice(1);
 
-  const handleChecked = () => {
-    checked ? setChecked(false) : setChecked(true);
+  useEffect(() => {
+    completed ? setChecked(true) : setChecked(false);
+  }, [todos]);
 
+  const handleChecked = () => {
     const updatePayload = {
       id,
       entry,
       completed: checked ? false : true,
+      index: currentIndex,
     };
 
     // update the redux
@@ -28,13 +32,16 @@ function List({ id, entry, completed, firstIndex, currentIndex, lastIndex }) {
   };
 
   const handleRemoveEntry = () => {
+    const updatedPayload = [];
+    for (let i = 0; i < todos.length; i++) {
+      updatedPayload.push(todos[i]);
+    }
+
+    updatedPayload.splice(currentIndex, 1);
+    localStorage.setItem('todos', JSON.stringify(updatedPayload));
+
     // update the redux
     dispatch(removeEntry(currentIndex));
-
-    // update local storage
-    const fetchStorage = JSON.parse(localStorage.getItem('todos'));
-    fetchStorage.splice(currentIndex, 1);
-    localStorage.setItem('todos', JSON.stringify(fetchStorage));
   };
 
   return (
