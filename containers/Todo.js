@@ -62,7 +62,7 @@ function Todo() {
 
   return (
     <div className='h-4/6 w-10/12 sm:w-8/12 md:w-6/12 lg:w-4/12 p-2 grid gap-2 grid-rows-6 rounded-md shadow-lg border border-orange-400 dark:border-violet-500 bg-white dark:bg-neutral-900  relative'>
-      <div className='row-span-4 h-full w-full p-2 bg-gradient-to-r from-orange-400 to-yellow-500 dark:from-violet-500 dark:to-pink-500 rounded-md'>
+      <div className='row-span-4 h-full overflow-hidden w-full p-2 bg-gradient-to-r from-orange-400 to-yellow-500 dark:from-violet-500 dark:to-pink-500 rounded-md'>
         <p className='text-white uppercase text-center text-3xl tracking-wide antialiased font-sans font-bold select-none'>
           {moment(Date.now()).format('ddd, D MMMM')}
         </p>

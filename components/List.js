@@ -51,7 +51,7 @@ function List({ id, entry, completed, firstIndex, currentIndex, lastIndex }) {
       } ${lastIndex ? null : 'border-b'} border-white`}
     >
       <p
-        className={`cursor-default w-3/4 font-medium font-sans ${
+        className={`cursor-default w-3/4 font-medium font-sans break-words ${
           checked ? 'line-through decoration-1 text-neutral-400' : 'text-white'
         } select-none`}
       >
