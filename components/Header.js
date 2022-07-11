@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Button from './Button';
 
 // redux
-import { useDispatch } from 'react-redux';
-import { switchDarkTheme, switchLightTheme } from '../redux/features/theme';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  initTheme,
+  switchDarkTheme,
+  switchLightTheme,
+} from '../redux/features/theme';
 
 function Header() {
   const icons = {
@@ -36,15 +40,38 @@ function Header() {
   };
 
   const dispatch = useDispatch();
+  const { darkMode } = useSelector((state) => state.theme);
+  const [darkModeSwitch, setDarkModeSwitch] = useState(true);
 
-  const [darkMode, setDarkMode] = useState(true);
   const handleMode = () => {
     darkMode ? dispatch(switchLightTheme()) : dispatch(switchDarkTheme());
-    darkMode ? setDarkMode(false) : setDarkMode(true);
-    document.documentElement.classList.toggle('dark');
+    darkMode
+      ? localStorage.setItem('darkMode', false)
+      : localStorage.setItem('darkMode', true);
   };
 
   useEffect(() => {
+    if (localStorage.getItem('darkMode') == 'true') {
+      console.log('1');
+      dispatch(initTheme(true));
+      document.documentElement.classList.add('dark');
+    } else if (localStorage.getItem('darkMode') == 'false') {
+      console.log('2');
+      dispatch(initTheme(false));
+      document.documentElement.classList.remove('dark');
+    } else {
+      console.log('3');
+      dispatch(initTheme(darkModeSwitch));
+      localStorage.setItem('darkMode', darkModeSwitch);
+
+      darkModeSwitch
+        ? document.documentElement.classList.add('dark')
+        : document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  useEffect(() => {
+    // init dark class on html based on state
     darkMode
       ? document.documentElement.classList.add('dark')
       : document.documentElement.classList.remove('dark');
