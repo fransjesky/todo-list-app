@@ -52,15 +52,12 @@ function Header() {
 
   useEffect(() => {
     if (localStorage.getItem('darkMode') == 'true') {
-      console.log('1');
       dispatch(initTheme(true));
       document.documentElement.classList.add('dark');
     } else if (localStorage.getItem('darkMode') == 'false') {
-      console.log('2');
       dispatch(initTheme(false));
       document.documentElement.classList.remove('dark');
     } else {
-      console.log('3');
       dispatch(initTheme(darkModeSwitch));
       localStorage.setItem('darkMode', darkModeSwitch);
 
@@ -82,7 +79,7 @@ function Header() {
       <div className='flex flex-col'>
         <p className='m-0 dark:text-white select-none'>Simple Todo App</p>
         <span className='font-sans text-xs text-gray-400 select-none'>
-          ver 0.6
+          ver 0.7
         </span>
       </div>
       {darkMode ? (

@@ -15,23 +15,33 @@ function Todo() {
 
   useEffect(() => {
     // create a local storage if there is no existing storage
-    localStorage.getItem('todos') ? null : localStorage.setItem('todos', todos);
+    localStorage.getItem('todos')
+      ? null
+      : localStorage.setItem('todos', JSON.stringify(todos));
 
-    const fetchStorage = localStorage.getItem('todos');
+    const fetchStorage = JSON.parse(localStorage.getItem('todos'));
     if (localStorage.getItem('todos')) {
-      dispatch(getInit(fetchStorage.split(',')));
+      dispatch(getInit(fetchStorage));
     }
   }, []);
 
   const addTodo = (event) => {
-    // save new entry to redux
     event.preventDefault();
-    dispatch(addEntry(newEntry));
+
+    // save new entry to redux
+    const entryPayload = {
+      id: Date.now(),
+      entry: newEntry,
+      completed: false,
+    };
+    dispatch(addEntry(entryPayload));
 
     // save new entry to local storage
     localStorage.setItem(
       'todos',
-      todos.length > 0 ? [...todos, newEntry] : [newEntry]
+      todos.length > 0
+        ? JSON.stringify([...todos, entryPayload])
+        : JSON.stringify([entryPayload])
     );
 
     // clear input
@@ -43,7 +53,7 @@ function Todo() {
     dispatch(clearEntries());
 
     // reset the storage
-    localStorage.setItem('todos', []);
+    localStorage.setItem('todos', JSON.stringify([]));
   };
 
   const handleChange = (event) => {
@@ -61,7 +71,9 @@ function Todo() {
             todos.map((value, index) => {
               return (
                 <List
-                  entry={value}
+                  id={value.id}
+                  entry={value.entry}
+                  completed={value.completed}
                   firstIndex={index == 0 ? true : false}
                   currentIndex={index}
                   lastIndex={index == todos.length - 1 ? true : false}

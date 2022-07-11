@@ -18,13 +18,16 @@ const entriesSlice = createSlice({
     removeEntry: (state, action) => {
       state.splice(action.payload, 1);
     },
+    checkEntry: (state, action) => {
+      state.splice(action.payload.index, 1, action.payload);
+    },
     clearEntries: (state) => {
       state.splice(0, state.length);
     },
   },
 });
 
-export const { getInit, addEntry, removeEntry, clearEntries } =
+export const { getInit, addEntry, removeEntry, checkEntry, clearEntries } =
   entriesSlice.actions;
 
 export default entriesSlice.reducer;
